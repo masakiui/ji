@@ -1,0 +1,72 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>人生というゲーム ～君の選択が人生をつくる～</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>人生というゲーム</h1>
+
+        <p class="subtitle">
+            ～君の選択が人生をつくる～
+        </p>
+
+        <p class="catch">
+            人生に正解はない。<br>
+            あるのは、君が積み重ねた選択だけ。
+        </p>
+
+        <div class="menu">
+
+            <button onclick="location.href='game.html'">
+                ▶ GAME START
+            </button>
+
+            <button onclick="location.href='save.html'">
+                ▶ CONTINUE
+            </button>
+
+            <button onclick="location.href='guide.html'">
+                ▶ GUIDE
+            </button>
+
+            <button onclick="location.href='settings.html'">
+                ▶ SETTINGS
+            </button>
+
+            <button onclick="location.href='credits.html'">
+                ▶ CREDITS
+            </button>
+
+        </div>
+
+        <div class="version">
+            Version 0.1.0 Alpha
+        </div>
+
+        <footer>
+            © 2026 人生というゲーム Project
+        </footer>
+
+        <!-- ARG演出用（通常は非表示） -->
+        <p id="secretMessage"
+           style="display:none;">
+            君は、本当にプレイヤー？
+        </p>
+
+    </main>
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>
+```
