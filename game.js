@@ -1,0 +1,275 @@
+```javascript
+/*=========================================
+ 人生というゲーム
+ game.js Ver.0.1
+=========================================*/
+
+const player = {
+
+    name:"主人公",
+
+    age:24,
+
+    job:"地方の準社員",
+
+    hourly:1040,
+
+    money:30000,
+
+    saving:0,
+
+    hp:100,
+
+    happy:50,
+
+    knowledge:1,
+
+    finance:0,
+
+    skill:0
+
+};
+
+
+/*=========================
+ 初期化
+=========================*/
+
+window.onload = function(){
+
+    loadGame();
+
+    updateStatus();
+
+}
+
+
+/*=========================
+ ステータス更新
+=========================*/
+
+function updateStatus(){
+
+    document.getElementById("money").textContent =
+    player.money.toLocaleString()+"円";
+
+    document.getElementById("saving").textContent =
+    player.saving.toLocaleString()+"円";
+
+    document.getElementById("hp").textContent =
+    player.hp;
+
+    document.getElementById("happy").textContent =
+    player.happy;
+
+    document.getElementById("knowledge").textContent =
+    player.knowledge;
+
+}
+
+
+/*=========================
+ ログ
+=========================*/
+
+function addLog(text){
+
+    const log=document.getElementById("log");
+
+    log.innerHTML += "<br>"+text;
+
+    log.scrollTop=log.scrollHeight;
+
+}
+
+
+/*=========================
+ イベント表示
+=========================*/
+
+function eventText(text){
+
+    document.getElementById("eventText").innerHTML=text;
+
+}
+
+
+/*=========================
+ 仕事
+=========================*/
+
+document.getElementById("work").onclick=function(){
+
+    player.money+=player.hourly*8;
+
+    player.hp-=20;
+
+    player.happy-=2;
+
+    addLog("仕事をした。");
+
+    eventText("今日は真面目に働いた。");
+
+    updateStatus();
+
+}
+
+
+/*=========================
+ 勉強
+=========================*/
+
+document.getElementById("study").onclick=function(){
+
+    player.knowledge+=3;
+
+    player.hp-=10;
+
+    addLog("勉強した。");
+
+    eventText("知識が少し身についた。");
+
+    updateStatus();
+
+}
+
+
+/*=========================
+ 休む
+=========================*/
+
+document.getElementById("rest").onclick=function(){
+
+    player.hp+=25;
+
+    if(player.hp>100){
+
+        player.hp=100;
+
+    }
+
+    addLog("ゆっくり休んだ。");
+
+    eventText("体力が回復した。");
+
+    updateStatus();
+
+}
+
+
+/*=========================
+ 買い物
+=========================*/
+
+document.getElementById("shopping").onclick=function(){
+
+    if(player.money>=3000){
+
+        player.money-=3000;
+
+        player.happy+=8;
+
+        addLog("買い物を楽しんだ。");
+
+        eventText("少し贅沢をした。");
+
+    }
+
+    else{
+
+        addLog("お金が足りない。");
+
+        eventText("財布の中身を確認した。");
+
+    }
+
+    updateStatus();
+
+}
+
+
+/*=========================
+ 投資
+=========================*/
+
+document.getElementById("investment").onclick=function(){
+
+    player.finance++;
+
+    player.knowledge++;
+
+    addLog("投資について学んだ。");
+
+    eventText("リスクとリターンを学んだ。");
+
+    updateStatus();
+
+}
+
+
+/*=========================
+ 資格
+=========================*/
+
+document.getElementById("skill").onclick=function(){
+
+    player.skill++;
+
+    player.knowledge+=2;
+
+    player.hp-=8;
+
+    addLog("資格取得に向けて勉強した。");
+
+    eventText("少しずつ成長している。");
+
+    updateStatus();
+
+}
+
+
+/*=========================
+ セーブ
+=========================*/
+
+document.getElementById("save").onclick=function(){
+
+    localStorage.setItem(
+
+        "saveData",
+
+        JSON.stringify(player)
+
+    );
+
+    addLog("セーブしました。");
+
+}
+
+
+/*=========================
+ ロード
+=========================*/
+
+function loadGame(){
+
+    const save=
+
+    localStorage.getItem("saveData");
+
+    if(save){
+
+        Object.assign(
+
+            player,
+
+            JSON.parse(save)
+
+        );
+
+        addLog("セーブデータを読み込みました。");
+
+    }
+
+}
+```
