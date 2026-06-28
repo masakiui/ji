@@ -1,0 +1,312 @@
+```css
+/* =======================================
+   人生というゲーム
+   game.css
+======================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg:#081018;
+    --panel:#121b27;
+    --panel2:#1a2635;
+
+    --border:#3c5f88;
+
+    --text:#edf4ff;
+
+    --sub:#9fb5cf;
+
+    --accent:#6cb8ff;
+
+}
+
+body{
+
+    background:
+    linear-gradient(180deg,#081018,#111827,#1a2332);
+
+    color:var(--text);
+
+    font-family:
+    "Yu Gothic",
+    sans-serif;
+
+    min-height:100vh;
+
+}
+
+/* ========================= */
+
+.game-container{
+
+    display:grid;
+
+    grid-template-columns:280px 1fr;
+
+    gap:20px;
+
+    width:95%;
+
+    margin:30px auto;
+
+}
+
+/* ========================= */
+
+.status{
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,.45);
+
+}
+
+.status h2{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    color:var(--accent);
+
+}
+
+.status p{
+
+    margin:15px 0;
+
+    line-height:1.7;
+
+    color:var(--sub);
+
+}
+
+.status span{
+
+    color:white;
+
+}
+
+/* ========================= */
+
+.main{
+
+    background:var(--panel);
+
+    border-radius:15px;
+
+    border:1px solid var(--border);
+
+    padding:30px;
+
+    box-shadow:
+    0 0 20px rgba(0,0,0,.45);
+
+}
+
+header{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+header h1{
+
+    font-size:2.3rem;
+
+    margin-bottom:10px;
+
+}
+
+header p{
+
+    color:var(--sub);
+
+}
+
+/* ========================= */
+
+.event-window{
+
+    background:var(--panel2);
+
+    border-left:5px solid var(--accent);
+
+    border-radius:10px;
+
+    padding:20px;
+
+    margin-bottom:30px;
+
+}
+
+.event-window h2{
+
+    margin-bottom:15px;
+
+    color:var(--accent);
+
+}
+
+.event-window p{
+
+    line-height:2;
+
+}
+
+/* ========================= */
+
+.actions{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+}
+
+.actions button{
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    background:#203349;
+
+    color:white;
+
+    font-size:1rem;
+
+    transition:.25s;
+
+}
+
+.actions button:hover{
+
+    background:#2f4e71;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 0 15px rgba(108,184,255,.4);
+
+}
+
+.actions button:active{
+
+    transform:scale(.97);
+
+}
+
+/* ========================= */
+
+.log-window{
+
+    width:95%;
+
+    margin:20px auto 40px;
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:25px;
+
+}
+
+.log-window h2{
+
+    margin-bottom:15px;
+
+    color:var(--accent);
+
+}
+
+#log{
+
+    height:180px;
+
+    overflow-y:auto;
+
+    line-height:1.8;
+
+    color:#d8e3ef;
+
+    white-space:pre-line;
+
+}
+
+/* ========================= */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#3b5b82;
+
+    border-radius:10px;
+
+}
+
+/* ========================= */
+
+@media(max-width:900px){
+
+.game-container{
+
+grid-template-columns:1fr;
+
+}
+
+.actions{
+
+grid-template-columns:1fr;
+
+}
+
+header h1{
+
+font-size:1.8rem;
+
+}
+
+.status{
+
+order:2;
+
+}
+
+.main{
+
+order:1;
+
+}
+
+}
+```
