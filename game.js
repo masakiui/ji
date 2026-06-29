@@ -26,8 +26,13 @@ window.onload = function () {
 // 名前読み込み
 // --------------------
 function loadPlayerName() {
+
     const saved = localStorage.getItem("playerName");
-    if (saved) player.name = saved;
+
+    if (saved) {
+        player.name = saved;
+    }
+}
 }
 
 // --------------------
