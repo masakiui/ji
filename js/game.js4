@@ -1,0 +1,109 @@
+// =======================================
+// 人生というゲーム
+// game.js Ver.2.0 Part4
+// 投資システム
+// =======================================
+
+// 積立設定
+const investment = {
+    type: "",
+    monthlyAmount: 0
+};
+
+// ----------------------
+// 積立開始
+// ----------------------
+function startInvestment(type){
+
+    const input = prompt("毎月の積立額を入力してください（円）");
+
+    if(input === null) return;
+
+    const amount = Number(input);
+
+    if(isNaN(amount) || amount <= 0){
+
+        alert("正しい金額を入力してください。");
+
+        return;
+
+    }
+
+    investment.type = type;
+    investment.monthlyAmount = amount;
+
+    addLog(type + "の積立を開始（月" + amount.toLocaleString() + "円）");
+
+    setEvent(
+        "📈 積立開始",
+        type + "へ毎月" + amount.toLocaleString() + "円積み立てます。"
+    );
+
+}
+
+// ----------------------
+// 毎月積立
+// ----------------------
+function monthlyInvestment(){
+
+    if(investment.monthlyAmount <= 0) return;
+
+    if(player.money < investment.monthlyAmount){
+
+        addLog("積立資金不足");
+
+        return;
+
+    }
+
+    player.money -= investment.monthlyAmount;
+    player.investmentMoney += investment.monthlyAmount;
+
+    addLog("積立 +" + investment.monthlyAmount.toLocaleString() + "円");
+
+}
+
+// ----------------------
+// 年利5〜7%
+/* 年末に呼び出す */
+// ----------------------
+function yearlyInvestmentGrowth(){
+
+    if(player.investmentMoney <= 0){
+
+        return;
+
+    }
+
+    const rate = 0.05 + Math.random()*0.02;
+
+    const gain = Math.floor(player.investmentMoney * rate);
+
+    player.investmentMoney += gain;
+
+    addLog(
+        "投資利益 +" +
+        gain.toLocaleString() +
+        "円"
+    );
+
+}
+
+// ----------------------
+// 詐欺投資
+// ----------------------
+function fakeInvestment(){
+
+    setEvent(
+
+        "☠ バッドエンド",
+
+        "ジョーカーにご用心。<br><br>甘い話には裏がある。"
+
+    );
+
+    alert("BAD END\nジョーカーにご用心");
+
+    location.href="index.html";
+
+}
