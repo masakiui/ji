@@ -313,7 +313,67 @@ function loadGame(){
         );
 
         addLog("セーブデータを読み込みました。");
+const events = {
+    grandmother: {
+        weight: 0.1, // 発生率
+        run: function () {
 
+            const choice = confirm("👵祖母：知人の家まで付き添う？\nOK＝付き添う / キャンセル＝断る");
+
+            if (choice) {
+
+                player.money += 1000;
+                alert("祖母と外出した。\n＋1,000円");
+
+            } else {
+                alert("何も起こらなかった。");
+            }
+        }
+    },
+
+    mother: {
+        weight: 0.25, // 発生率
+        run: function () {
+
+            const go = confirm("👩母：ウィンドーショッピングに行く？");
+
+            if (!go) {
+                alert("今日は行かなかった。");
+                return;
+            }
+
+            const buy = confirm("買い物する？\nOK＝する / キャンセル＝しない");
+
+            if (buy) {
+
+                const cost = Math.floor(Math.random() * 5000) + 1000;
+                player.money -= cost;
+
+                alert("買い物をした。\n－" + cost + "円");
+
+            } else {
+                alert("何も買わなかった。");
+            }
+        }
+    }
+};
+function triggerDailyEvent() {
+
+    // 祖母イベント判定
+    if (Math.random() < events.grandmother.weight) {
+        events.grandmother.run();
+        return;
+    }
+
+    // 母イベント判定
+    if (Math.random() < events.mother.weight) {
+        events.mother.run();
+        return;
+    }
+
+    // 何も起きない日
+    console.log("平穏な一日");
+}
     }
 
 }
