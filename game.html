@@ -2,58 +2,160 @@
 <html lang="ja">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>人生というゲーム</title>
+
+    <title>人生というゲーム ～君の選択が人生をつくる～</title>
+
     <link rel="stylesheet" href="css/game.css">
+
 </head>
 
 <body>
 
 <div class="game-container">
 
-    <!-- ステータス -->
+    <!--==============================
+        ステータス
+    ==============================-->
+
     <aside class="status">
 
         <h2>PLAYER STATUS</h2>
 
-        <p>名前<br><span id="playerName">主人公</span></p>
-        <p>年齢<br><span id="age">24歳</span></p>
-        <p>職業<br><span id="job">地方の準社員</span></p>
-        <p>時給<br><span id="hourly">1040円</span></p>
+        <hr>
 
-        <p>所持金<br><span id="money">30000円</span></p>
-        <p>貯金<br><span id="saving">0円</span></p>
+        <p>
+            <strong>名前</strong><br>
+            <span id="playerName">主人公</span>
+        </p>
 
-        <p>体力<br><span id="hp">100</span></p>
-        <p>幸福度<br><span id="happy">50</span></p>
-        <p>知識<br><span id="knowledge">1</span></p>
+        <p>
+            <strong>年齢</strong><br>
+            <span id="age">24歳</span>
+        </p>
+
+        <p>
+            <strong>職業</strong><br>
+            <span id="job">地方の準社員</span>
+        </p>
+
+        <p>
+            <strong>時給</strong><br>
+            <span id="hourly">1040円</span>
+        </p>
+
+        <hr>
+
+        <p>
+            <strong>所持金</strong><br>
+            <span id="money">30,000円</span>
+        </p>
+
+        <p>
+            <strong>貯金</strong><br>
+            <span id="saving">0円</span>
+        </p>
+
+        <p>
+            <strong>投資資産</strong><br>
+            <span id="investmentMoney">0円</span>
+        </p>
+
+        <hr>
+
+        <p>
+            <strong>体力</strong><br>
+            <span id="hp">100</span>
+        </p>
+
+        <p>
+            <strong>幸福度</strong><br>
+            <span id="happy">50</span>
+        </p>
+
+        <p>
+            <strong>知識</strong><br>
+            <span id="knowledge">1</span>
+        </p>
+
+        <p>
+            <strong>学習意欲</strong><br>
+            ★★★☆☆
+        </p>
+
+        <p>
+            <strong>特性</strong><br>
+            覚えにくい性格
+        </p>
 
     </aside>
 
-    <!-- メイン -->
+    <!--==============================
+        メイン画面
+    ==============================-->
+
     <main class="main">
 
         <header>
+
             <h1>人生というゲーム</h1>
-            <p id="dateText">第1年 春 月曜日</p>
+
+            <h3>～君の選択が人生をつくる～</h3>
+
+            <hr>
+
+            <p>
+
+                <span id="year">第1年</span>　
+
+                <span id="season">春</span>　
+
+                <span id="month">4月</span>　
+
+                <span id="day">1日</span>　
+
+                <span id="week">月曜日</span>
+
+            </p>
+
         </header>
 
+        <!-- イベント -->
+
         <section class="event-window">
+
             <h2>今日の出来事</h2>
+
             <p id="eventText">
-                今日も静かな朝を迎えた。<br>
-                さて…君は今日何を選ぶ？
+
+                今日も静かな朝を迎えた。
+
+                <br><br>
+
+                君は今日、
+
+                何を選ぶ？
+
             </p>
+
         </section>
+
+        <!-- 行動 -->
 
         <section class="actions">
 
             <button id="work">💼 仕事へ行く</button>
+
             <button id="study">📚 勉強する</button>
+
             <button id="rest">🛏 休む</button>
+
             <button id="shopping">🛒 買い物</button>
+
             <button id="investment">📈 投資を学ぶ</button>
+
             <button id="skill">🎓 資格取得</button>
 
             <button id="save">💾 セーブ</button>
@@ -68,14 +170,24 @@
 
 </div>
 
-<!-- ログ -->
+<!--==============================
+    GAME LOG
+==============================-->
+
 <section class="log-window">
+
     <h2>GAME LOG</h2>
-    <div id="log">ゲーム開始。</div>
+
+    <div id="log">
+
+        ゲーム開始。
+
+    </div>
+
 </section>
 
-<!-- JSは1回だけ -->
 <script src="js/game.js"></script>
 
 </body>
+
 </html>
