@@ -1,0 +1,201 @@
+// =======================================
+// 人生というゲーム
+// game.js Ver.2.0 Part1
+// =======================================
+
+// ----------------------
+// プレイヤーデータ
+// ----------------------
+
+const player = {
+
+    name: "主人公",
+
+    age: 24,
+
+    job: "地方の準社員",
+
+    hourly: 1040,
+
+    money: 30000,
+
+    saving: 0,
+
+    investmentMoney: 0,
+
+    hp: 100,
+
+    happy: 50,
+
+    knowledge: 1
+
+};
+
+// ----------------------
+// 日付
+// ----------------------
+
+const gameDate = {
+
+    year: 1,
+
+    month: 4,
+
+    day: 1,
+
+    week: 0
+
+};
+
+const weeks = [
+
+    "月曜日",
+    "火曜日",
+    "水曜日",
+    "木曜日",
+    "金曜日",
+    "土曜日",
+    "日曜日"
+
+];
+
+// ----------------------
+// 初期化
+// ----------------------
+
+document.addEventListener("DOMContentLoaded", init);
+
+function init(){
+
+    loadPlayerName();
+
+    updateUI();
+
+    bindButtons();
+
+    setEvent(
+        "ゲーム開始",
+        "今日も静かな朝を迎えた。<br><br>君は今日、何を選ぶ？"
+    );
+
+    addLog("ゲーム開始");
+
+}
+
+// ----------------------
+// 名前読み込み
+// ----------------------
+
+function loadPlayerName(){
+
+    const savedName = localStorage.getItem("playerName");
+
+    if(savedName){
+
+        player.name = savedName;
+
+    }
+
+}
+
+// ----------------------
+// UI更新
+// ----------------------
+
+function updateUI(){
+
+    document.getElementById("playerName").textContent = player.name;
+
+    document.getElementById("age").textContent =
+        player.age + "歳";
+
+    document.getElementById("job").textContent =
+        player.job;
+
+    document.getElementById("hourly").textContent =
+        player.hourly.toLocaleString() + "円";
+
+    document.getElementById("money").textContent =
+        player.money.toLocaleString() + "円";
+
+    document.getElementById("saving").textContent =
+        player.saving.toLocaleString() + "円";
+
+    document.getElementById("investmentMoney").textContent =
+        player.investmentMoney.toLocaleString() + "円";
+
+    document.getElementById("hp").textContent =
+        player.hp;
+
+    document.getElementById("happy").textContent =
+        player.happy;
+
+    document.getElementById("knowledge").textContent =
+        player.knowledge;
+
+    document.getElementById("year").textContent =
+        "第" + gameDate.year + "年";
+
+    document.getElementById("month").textContent =
+        gameDate.month + "月";
+
+    document.getElementById("day").textContent =
+        gameDate.day + "日";
+
+    document.getElementById("week").textContent =
+        weeks[gameDate.week];
+
+}
+
+// ----------------------
+// イベント表示
+// ----------------------
+
+function setEvent(title,text){
+
+    document.getElementById("eventText").innerHTML =
+
+        "<strong>" +
+
+        title +
+
+        "</strong><br><br>" +
+
+        text;
+
+}
+
+// ----------------------
+// ログ
+// ----------------------
+
+function addLog(text){
+
+    const log = document.getElementById("log");
+
+    log.innerHTML =
+        text + "<br>" + log.innerHTML;
+
+}
+
+// ----------------------
+// ボタン接続
+// ----------------------
+
+function bindButtons(){
+
+    document.getElementById("work").onclick = work;
+
+    document.getElementById("study").onclick = study;
+
+    document.getElementById("rest").onclick = rest;
+
+    document.getElementById("shopping").onclick = shopping;
+
+    document.getElementById("investment").onclick = investment;
+
+    document.getElementById("skill").onclick = skill;
+
+    document.getElementById("save").onclick = saveGame;
+
+}
