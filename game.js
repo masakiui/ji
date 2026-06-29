@@ -1,4 +1,3 @@
-console.log("GAME.JS 読み込み成功");
 const player = {
     name: "主人公",
     age: 24,
@@ -13,23 +12,23 @@ const player = {
     knowledge: 1
 };
 
-// --------------------
+// ====================
 // 初期化
-// --------------------
+// ====================
 document.addEventListener("DOMContentLoaded", function () {
 
-    const saved = localStorage.getItem("playerName");
+    console.log("GAME JS 起動");
 
-    if (saved) {
-        player.name = saved;
-    }
-
+    loadPlayerName();
     updateUI();
     bindButtons();
+
+    setEvent("今日も静かな朝を迎えた。君はどうする？");
 });
-// --------------------
-// 名前読み込み
-// --------------------
+
+// ====================
+// データ読み込み
+// ====================
 function loadPlayerName() {
 
     const saved = localStorage.getItem("playerName");
@@ -39,9 +38,9 @@ function loadPlayerName() {
     }
 }
 
-// --------------------
+// ====================
 // UI更新
-// --------------------
+// ====================
 function updateUI() {
 
     document.getElementById("playerName").textContent = player.name;
@@ -51,14 +50,15 @@ function updateUI() {
 
     document.getElementById("money").textContent = player.money.toLocaleString() + "円";
     document.getElementById("saving").textContent = player.saving.toLocaleString() + "円";
+
     document.getElementById("hp").textContent = player.hp;
     document.getElementById("happy").textContent = player.happy;
     document.getElementById("knowledge").textContent = player.knowledge;
 }
 
-// --------------------
-// ログ追加
-// --------------------
+// ====================
+// ログ・イベント
+// ====================
 function addLog(text) {
 
     const log = document.getElementById("log");
@@ -66,9 +66,14 @@ function addLog(text) {
     log.innerHTML = text + "<br>" + log.innerHTML;
 }
 
-// --------------------
+function setEvent(text) {
+
+    document.getElementById("eventText").innerHTML = text;
+}
+
+// ====================
 // ボタン紐付け
-// --------------------
+// ====================
 function bindButtons() {
 
     document.getElementById("work").onclick = work;
@@ -80,9 +85,9 @@ function bindButtons() {
     document.getElementById("save").onclick = saveGame;
 }
 
-// --------------------
-// 行動
-// --------------------
+// ====================
+// 行動：仕事
+// ====================
 function work() {
 
     const income = player.hourly * 8;
@@ -90,103 +95,88 @@ function work() {
     player.money += income;
     player.hp -= 10;
 
-    addLog(`仕事をした +${income}円`);
-    nextDay();
+    setEvent("仕事へ向かった。疲れたが収入を得た。");
+    addLog(`仕事 +${income}円`);
+
+    updateUI();
 }
 
+// ====================
+// 行動：勉強
+// ====================
 function study() {
 
     player.knowledge += 1;
     player.hp -= 5;
 
-    addLog("勉強した +知識1");
-    nextDay();
+    setEvent("集中して勉強した。知識が少し増えた。");
+    addLog("勉強 +知識1");
+
+    updateUI();
 }
 
+// ====================
+// 行動：休む
+// ====================
 function rest() {
 
     player.hp += 20;
     if (player.hp > 100) player.hp = 100;
 
-    addLog("休んだ HP回復");
-    nextDay();
+    setEvent("ゆっくり休んだ。体力回復。");
+    addLog("休憩 HP回復");
+
+    updateUI();
 }
 
+// ====================
+// 行動：買い物
+// ====================
 function shopping() {
 
     const cost = Math.floor(Math.random() * 5000) + 1000;
 
     player.money -= cost;
 
+    setEvent("買い物をした。少しお金を使った。");
     addLog(`買い物 -${cost}円`);
-    nextDay();
+
+    updateUI();
 }
 
+// ====================
+// 行動：投資
+// ====================
 function investment() {
 
-    addLog("投資について学んだ");
+    setEvent("投資について学んだ（まだ実行はできない）");
     player.knowledge += 1;
-    nextDay();
+
+    addLog("投資学習 +知識1");
+
+    updateUI();
 }
 
+// ====================
+// 行動：資格
+// ====================
 function skill() {
 
     player.knowledge += 2;
 
-    addLog("資格取得の勉強");
-    nextDay();
-}
+    setEvent("資格の勉強をした。成長した気がする。");
+    addLog("資格学習 +知識2");
 
-// --------------------
-// 1日進行
-// --------------------
-function nextDay() {
-
-    triggerEvent();
     updateUI();
 }
 
-// --------------------
-// イベント（祖母・母）
-// --------------------
-function triggerEvent() {
-
-    const r = Math.random();
-
-    if (r < 0.1) {
-
-        const ok = confirm("祖母：付き添う？");
-
-        if (ok) {
-            player.money += 1000;
-            addLog("祖母イベント +1000円");
-        }
-
-    } else if (r < 0.3) {
-
-        const go = confirm("母：買い物に行く？");
-
-        if (go) {
-
-            const buy = confirm("買う？");
-
-            if (buy) {
-
-                const cost = Math.floor(Math.random() * 5000) + 1000;
-                player.money -= cost;
-
-                addLog(`母イベント -${cost}円`);
-            }
-        }
-    }
-}
-
-// --------------------
+// ====================
 // セーブ
-// --------------------
+// ====================
 function saveGame() {
 
     localStorage.setItem("saveData", JSON.stringify(player));
 
+    addLog("セーブ完了");
     alert("セーブしました");
 }
