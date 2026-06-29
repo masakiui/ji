@@ -1,0 +1,201 @@
+// =======================================
+// 人生というゲーム
+// game.js Ver.2.0 Part2
+// 行動システム
+// =======================================
+
+// ----------------------
+// 仕事
+// ----------------------
+
+function work(){
+
+    const income = player.hourly * 8;
+
+    player.money += income;
+    player.hp -= 10;
+
+    if(player.hp < 0){
+        player.hp = 0;
+    }
+
+    setEvent(
+        "💼 仕事",
+        "今日は8時間働いた。<br><br>給料 +" +
+        income.toLocaleString() +
+        "円"
+    );
+
+    addLog("💼 仕事：+" + income.toLocaleString() + "円");
+
+    nextDay();
+
+}
+
+// ----------------------
+// 勉強
+// ----------------------
+
+function study(){
+
+    player.knowledge += 1;
+
+    player.hp -= 5;
+
+    if(player.hp < 0){
+        player.hp = 0;
+    }
+
+    setEvent(
+        "📚 勉強",
+        "今日は勉強をした。<br><br>知識が1上がった。"
+    );
+
+    addLog("📚 勉強した");
+
+    nextDay();
+
+}
+
+// ----------------------
+// 休む
+// ----------------------
+
+function rest(){
+
+    player.hp += 20;
+
+    if(player.hp > 100){
+
+        player.hp = 100;
+
+    }
+
+    player.happy += 2;
+
+    setEvent(
+        "🛏 休息",
+        "今日はゆっくり休んだ。"
+    );
+
+    addLog("🛏 休んだ");
+
+    nextDay();
+
+}
+
+// ----------------------
+// 買い物
+// ----------------------
+
+function shopping(){
+
+    const cost = Math.floor(Math.random()*5000)+1000;
+
+    player.money -= cost;
+
+    player.happy += 5;
+
+    setEvent(
+
+        "🛒 買い物",
+
+        "買い物をした。<br><br>" +
+
+        cost.toLocaleString() +
+
+        "円使った。"
+
+    );
+
+    addLog("🛒 -" + cost.toLocaleString() + "円");
+
+    nextDay();
+
+}
+
+// ----------------------
+// 投資を学ぶ
+// ----------------------
+
+function investment(){
+
+    player.knowledge += 2;
+
+    player.hp -= 3;
+
+    setEvent(
+
+        "📈 投資",
+
+        "今日は投資について学んだ。"
+
+    );
+
+    addLog("📈 投資を学んだ");
+
+    nextDay();
+
+}
+
+// ----------------------
+// 資格取得
+// ----------------------
+
+function skill(){
+
+    player.knowledge += 3;
+
+    player.hp -= 10;
+
+    setEvent(
+
+        "🎓 資格",
+
+        "資格取得の勉強を進めた。"
+
+    );
+
+    addLog("🎓 資格取得");
+
+    nextDay();
+
+}
+
+// ----------------------
+// 1日進行
+// ----------------------
+
+function nextDay(){
+
+    gameDate.day++;
+
+    gameDate.week++;
+
+    if(gameDate.week >= 7){
+
+        gameDate.week = 0;
+
+    }
+
+    if(gameDate.day > 30){
+
+        gameDate.day = 1;
+
+        gameDate.month++;
+
+    }
+
+    if(gameDate.month > 12){
+
+        gameDate.month = 1;
+
+        gameDate.year++;
+
+        player.age++;
+
+    }
+
+    updateUI();
+
+}
