@@ -27,10 +27,16 @@
 
         <div class="menu">
 
-            <button onclick="location.href='game.html'">
-                ▶ GAME START
-            </button>
+           
+<h2>主人公の名前</h2>
 
+<input type="text" id="nameInput" placeholder="名前を入力">
+
+<br><br>
+
+<button onclick="startGame()">
+    ▶ GAME START
+</button>
      
            <button id="continueButton">
 
@@ -69,6 +75,21 @@
     </main>
 
     <script src="js/main.js"></script>
+    <script>
+function startGame() {
+
+    const name = document.getElementById("nameInput").value;
+
+    if (!name) {
+        alert("名前を入力してください");
+        return;
+    }
+
+    localStorage.setItem("playerName", name);
+
+    location.href = "game.html";
+}
+</script>
 
 </body>
 </html>
