@@ -1,0 +1,182 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>設定 | 人生というゲーム</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>SETTINGS</h1>
+
+        <p class="subtitle">
+            ～ゲーム設定～
+        </p>
+
+        <div class="guide-box">
+
+            <h2>🔊 BGM音量</h2>
+
+            <input
+                type="range"
+                id="bgmVolume"
+                min="0"
+                max="100"
+                value="50">
+
+            <br><br>
+
+            <h2>🔔 効果音（SE）</h2>
+
+            <input
+                type="range"
+                id="seVolume"
+                min="0"
+                max="100"
+                value="70">
+
+            <br><br>
+
+            <h2>⚡ 文字表示速度</h2>
+
+            <select id="textSpeed">
+
+                <option>ゆっくり</option>
+
+                <option selected>標準</option>
+
+                <option>速い</option>
+
+                <option>一瞬</option>
+
+            </select>
+
+            <br><br>
+
+            <h2>🌙 テーマ</h2>
+
+            <select id="theme">
+
+                <option selected>ARG ダーク</option>
+
+                <option>ライト</option>
+
+                <option>クラシック</option>
+
+            </select>
+
+            <br><br>
+
+            <h2>💾 セーブデータ</h2>
+
+            <button id="deleteSave">
+
+                セーブデータを削除
+
+            </button>
+
+            <br><br>
+
+            <button id="saveSettings">
+
+                設定を保存
+
+            </button>
+
+        </div>
+
+        <div class="menu">
+
+            <button onclick="location.href='index.html'">
+
+                ← タイトルへ戻る
+
+            </button>
+
+        </div>
+
+        <div class="version">
+
+            Version 0.1.0 Alpha
+
+        </div>
+
+    </main>
+
+    <script>
+
+    // 設定保存
+
+    document.getElementById("saveSettings").onclick = function(){
+
+        const settings = {
+
+            bgm: document.getElementById("bgmVolume").value,
+
+            se: document.getElementById("seVolume").value,
+
+            speed: document.getElementById("textSpeed").value,
+
+            theme: document.getElementById("theme").value
+
+        };
+
+        localStorage.setItem("gameSettings", JSON.stringify(settings));
+
+        alert("設定を保存しました。");
+
+    };
+
+
+    // 保存済み設定を読み込む
+
+    window.onload = function(){
+
+        const settings = JSON.parse(localStorage.getItem("gameSettings"));
+
+        if(settings){
+
+            document.getElementById("bgmVolume").value = settings.bgm;
+
+            document.getElementById("seVolume").value = settings.se;
+
+            document.getElementById("textSpeed").value = settings.speed;
+
+            document.getElementById("theme").value = settings.theme;
+
+        }
+
+    };
+
+
+    // セーブデータ削除
+
+    document.getElementById("deleteSave").onclick = function(){
+
+        if(confirm("セーブデータを削除しますか？")){
+
+            localStorage.removeItem("saveData");
+
+            alert("セーブデータを削除しました。");
+
+        }
+
+    };
+
+    </script>
+
+</body>
+
+</html>
+```
