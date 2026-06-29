@@ -1,3 +1,4 @@
+console.log("GAME.JS 読み込み成功");
 const player = {
     name: "主人公",
     age: 24,
