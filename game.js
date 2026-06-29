@@ -5,6 +5,44 @@
 =========================================*/
 
 const player = {
+```javascript
+/*=========================================
+  プレイヤー名の読み込み
+=========================================*/
+
+const savedName = localStorage.getItem("playerName");
+
+if (savedName && savedName.trim() !== "") {
+    player.name = savedName;
+}
+
+/*=========================================
+  初回ゲーム開始判定
+=========================================*/
+
+function firstStart() {
+
+    const opened = localStorage.getItem("openingPlayed");
+
+    if (!opened) {
+
+        alert(
+`ようこそ、${player.name}。
+
+ここは「人生というゲーム」。
+
+君の選択が未来を変える。
+
+正解はない。
+あるのは、選んだ人生だけ。`
+        );
+
+        localStorage.setItem("openingPlayed", "true");
+    }
+
+}
+```
+
 
     name:"主人公",
 
