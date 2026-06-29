@@ -15,13 +15,17 @@ const player = {
 // --------------------
 // 初期化
 // --------------------
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-    loadPlayerName();
+    const saved = localStorage.getItem("playerName");
+
+    if (saved) {
+        player.name = saved;
+    }
+
     updateUI();
     bindButtons();
-};
-
+});
 // --------------------
 // 名前読み込み
 // --------------------
