@@ -73,11 +73,21 @@ function firstStart() {
  初期化
 =========================*/
 
+```javascript
 window.onload = function(){
 
     loadGame();
 
-    updateStatus();
+    firstStart();
+
+    updateStatus(```javascript
+document.getElementById("playerName").textContent = player.name;
+document.getElementById("age").textContent = player.age + "歳";
+document.getElementById("job").textContent = player.job;
+document.getElementById("hourly").textContent =
+    player.hourly.toLocaleString() + "円";
+```
+);
 
 }
 
