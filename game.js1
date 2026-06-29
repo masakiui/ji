@@ -29,6 +29,9 @@ const player = {
 
     knowledge: 1
 
+// 1日の行動回数
+actionCount: 0,
+maxAction: 2
 };
 
 // ----------------------
@@ -197,5 +200,19 @@ function bindButtons(){
     document.getElementById("skill").onclick = skill;
 
     document.getElementById("save").onclick = saveGame;
+const action = document.getElementById("actionCount");
+
+if(action){
+
+    action.textContent =
+        player.actionCount + " / " + player.maxAction;
+
+}
+}
+const nextButton = document.getElementById("nextDay");
+
+if(nextButton){
+
+    nextButton.onclick = nextDay;
 
 }
