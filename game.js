@@ -37,7 +37,6 @@ function loadPlayerName() {
         player.name = saved;
     }
 }
-}
 
 // --------------------
 // UI更新
