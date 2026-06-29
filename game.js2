@@ -7,7 +7,7 @@
 // ----------------------
 // 仕事
 // ----------------------
-
+if(!canAction()) return;
 function work(){
 
     const income = player.hourly * 8;
@@ -28,7 +28,9 @@ function work(){
 
     addLog("💼 仕事：+" + income.toLocaleString() + "円");
 
-    nextDay();
+  player.actionCount++;
+
+updateUI();
 
 }
 
@@ -53,7 +55,9 @@ function study(){
 
     addLog("📚 勉強した");
 
-    nextDay();
+   player.actionCount++;
+
+updateUI();
 
 }
 
@@ -80,7 +84,9 @@ function rest(){
 
     addLog("🛏 休んだ");
 
-    nextDay();
+    player.actionCount++;
+
+updateUI();
 
 }
 
@@ -110,7 +116,9 @@ function shopping(){
 
     addLog("🛒 -" + cost.toLocaleString() + "円");
 
-    nextDay();
+   player.actionCount++;
+
+updateUI();
 
 }
 
@@ -134,7 +142,9 @@ function investment(){
 
     addLog("📈 投資を学んだ");
 
-    nextDay();
+ player.actionCount++;
+
+updateUI();
 
 }
 
@@ -158,7 +168,9 @@ function skill(){
 
     addLog("🎓 資格取得");
 
-    nextDay();
+ player.actionCount++;
+
+updateUI();
 
 }
 
@@ -196,6 +208,8 @@ function nextDay(){
 
     }
 
-    updateUI();
+   player.actionCount++;
+
+updateUI();
 
 }
