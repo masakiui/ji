@@ -1,43 +1,34 @@
 ```javascript
-/* =====================================
-   人生というゲーム
-   ～君の選択が人生をつくる～
-   main.js
-===================================== */
+/*=========================================
+ 人生というゲーム
+ main.js Ver.1.0
+=========================================*/
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("人生というゲーム 起動");
-
     fadeIn();
 
-    continueCheck();
-
-    randomSecret();
-
-    keyboardControl();
+    setupContinue();
 
 });
 
 
-/* ------------------------------
-   フェードイン
------------------------------- */
+/*=============================
+ フェードイン
+=============================*/
 
 function fadeIn(){
 
-    const container = document.querySelector(".container");
+    const container=document.querySelector(".container");
 
-    if(!container) return;
-
-    container.style.opacity = "0";
-    container.style.transform = "translateY(15px)";
+    container.style.opacity=0;
+    container.style.transform="translateY(20px)";
 
     setTimeout(()=>{
 
-        container.style.transition="1.2s";
+        container.style.transition="1s";
 
-        container.style.opacity="1";
+        container.style.opacity=1;
 
         container.style.transform="translateY(0px)";
 
@@ -46,156 +37,39 @@ function fadeIn(){
 }
 
 
-/* ------------------------------
-   Continue判定
------------------------------- */
+/*=============================
+ CONTINUE
+=============================*/
 
-function continueCheck(){
+function setupContinue(){
 
-    const buttons = document.querySelectorAll(".menu button");
+    const button=document.getElementById("continueButton");
 
-    if(buttons.length < 2) return;
+    const saveData=localStorage.getItem("saveData");
 
-    const continueButton = buttons[1];
+    if(!button) return;
 
-    const saveData = localStorage.getItem("saveData");
+    if(saveData){
 
-    if(saveData===null){
+        button.onclick=function(){
 
-        continueButton.disabled=true;
+            location.href="game.html";
 
-        continueButton.style.opacity=".4";
+        };
 
-        continueButton.style.cursor="not-allowed";
+    }
+
+    else{
+
+        button.style.opacity=".5";
+
+        button.onclick=function(){
+
+            alert("セーブデータがありません。");
+
+        };
 
     }
 
 }
-
-
-/* ------------------------------
-   ボタン効果
------------------------------- */
-
-document.querySelectorAll(".menu button").forEach(button=>{
-
-    button.addEventListener("mouseenter",()=>{
-
-        button.style.transform="scale(1.03)";
-
-    });
-
-    button.addEventListener("mouseleave",()=>{
-
-        button.style.transform="scale(1)";
-
-    });
-
-});
-
-
-/* ------------------------------
-   ARG演出
------------------------------- */
-
-function randomSecret(){
-
-    const secret=document.getElementById("secretMessage");
-
-    if(!secret) return;
-
-    const chance=Math.random();
-
-    if(chance<0.03){
-
-        secret.style.opacity="1";
-
-        setTimeout(()=>{
-
-            secret.style.opacity="0";
-
-        },3500);
-
-    }
-
-}
-
-
-/* ------------------------------
-   キーボード操作
------------------------------- */
-
-function keyboardControl(){
-
-    const buttons=document.querySelectorAll(".menu button");
-
-    let selected=0;
-
-    if(buttons.length===0) return;
-
-    highlight();
-
-    document.addEventListener("keydown",(e)=>{
-
-        if(e.key==="ArrowDown"){
-
-            selected++;
-
-            if(selected>=buttons.length){
-
-                selected=0;
-
-            }
-
-            highlight();
-
-        }
-
-        if(e.key==="ArrowUp"){
-
-            selected--;
-
-            if(selected<0){
-
-                selected=buttons.length-1;
-
-            }
-
-            highlight();
-
-        }
-
-        if(e.key==="Enter"){
-
-            buttons[selected].click();
-
-        }
-
-    });
-
-    function highlight(){
-
-        buttons.forEach(button=>{
-
-            button.style.outline="none";
-
-        });
-
-        buttons[selected].style.outline="2px solid #8ec8ff";
-
-    }
-
-}
-
-
-/* ------------------------------
-   今後追加予定
-
-   ・タイトルBGM
-   ・ロード画面
-   ・日付取得
-   ・隠しイベント
-   ・実績確認
-   ・バージョンチェック
------------------------------- */
 ```
