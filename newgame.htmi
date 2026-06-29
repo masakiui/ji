@@ -1,0 +1,118 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>NEW GAME</title>
+
+<link rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body>
+
+<main class="container">
+
+<h1>NEW GAME</h1>
+
+<p class="subtitle">
+
+～人生はここから始まる～
+
+</p>
+
+<div class="guide-box">
+
+<h2>ようこそ。</h2>
+
+<p>
+
+君はこれから、
+
+数え切れない選択を重ねながら
+
+人生を歩んでいく。
+
+</p>
+
+<br>
+
+<p>
+
+正解はない。
+
+あるのは、
+
+選んだ未来だけ。
+
+</p>
+
+<br>
+
+<h2>主人公の名前</h2>
+
+<input
+
+type="text"
+
+id="playerName"
+
+placeholder="名前を入力"
+
+maxlength="20">
+
+<br><br>
+
+<button id="startGame">
+
+ゲームを始める
+
+</button>
+
+</div>
+
+<div class="menu">
+
+<button onclick="location.href='index.html'">
+
+← タイトルへ戻る
+
+</button>
+
+</div>
+
+</main>
+
+<script>
+
+document.getElementById("startGame").onclick=function(){
+
+const name=document.getElementById("playerName").value.trim();
+
+if(name===""){
+
+alert("名前を入力してください。");
+
+return;
+
+}
+
+localStorage.setItem("playerName",name);
+
+location.href="game.html";
+
+};
+
+</script>
+
+</body>
+
+</html>
+```
