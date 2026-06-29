@@ -1,0 +1,124 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CREDITS | 人生というゲーム</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>CREDITS</h1>
+
+        <p class="subtitle">
+            ～このゲームに関わるすべての人へ～
+        </p>
+
+        <div class="guide-box">
+
+            <h2>🎮 タイトル</h2>
+
+            <p>
+                人生というゲーム<br>
+                ～君の選択が人生をつくる～
+            </p>
+
+            <h2>📝 企画・原案</h2>
+
+            <p>
+                伊藤 一輝
+            </p>
+
+            <h2>💻 開発</h2>
+
+            <p>
+                ChatGPT × 伊藤 一輝
+            </p>
+
+            <h2>🎨 ジャンル</h2>
+
+            <p>
+                人生シミュレーション<br>
+                マネーリテラシーRPG<br>
+                ARG（代替現実ゲーム）
+            </p>
+
+            <h2>🎯 コンセプト</h2>
+
+            <p>
+                「楽しみながら、お金と人生を学ぶ。」
+            </p>
+
+            <h2>🙏 Special Thanks</h2>
+
+            <p>
+                このゲームを遊んでくださるすべてのプレイヤーへ。
+            </p>
+
+            <h2>📦 Version</h2>
+
+            <p>
+                Ver.0.1.0 Alpha
+            </p>
+
+            <hr style="margin:30px 0; opacity:.3;">
+
+            <p style="text-align:center; color:#8ec8ff; font-style:italic;">
+
+                「未来は、まだ誰にも決まっていない。」
+
+            </p>
+
+            <!-- ARG用隠しメッセージ -->
+            <p id="secretCredit"
+               style="display:none; color:#ff7070; margin-top:25px; text-align:center;">
+
+                ……本当に、プレイヤーは君だけですか？
+
+            </p>
+
+        </div>
+
+        <div class="menu">
+
+            <button onclick="location.href='index.html'">
+
+                ← タイトルへ戻る
+
+            </button>
+
+        </div>
+
+        <div class="version">
+
+            © 2026 人生というゲーム Project
+
+        </div>
+
+    </main>
+
+    <script>
+
+    // 約3%の確率でARGメッセージを表示
+    if(Math.random() < 0.03){
+
+        document.getElementById("secretCredit").style.display = "block";
+
+    }
+
+    </script>
+
+</body>
+
+</html>
+```
