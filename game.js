@@ -114,7 +114,12 @@ function study() {
 
     updateUI();
 }
+function changeEvent(title, text){
 
+    document.getElementById("eventText").innerHTML =
+    "<strong>" + title + "</strong><br><br>" + text;
+
+}
 // ====================
 // 行動：休む
 // ====================
