@@ -1,188 +1,242 @@
+/*=========================================
+ 人生というゲーム
+ game.js
+ Ver1.0 Part1-1
+=========================================*/
+
+// =========================================
+// プレイヤーデータ
+// =========================================
 
 const player = {
+
+    // 基本情報
     name: "主人公",
     age: 24,
+    gender: "男性",
+
+    // 職業
     job: "地方の準社員",
     hourly: 1040,
 
+    // お金
     money: 30000,
     saving: 0,
+    investment: 0,
 
-    hp: 100,
-    happy: 50,
-    knowledge: 1
+    // 投資商品
+    portfolio:{
+
+        VTI:0,
+        ORLC:0,
+
+        SII:0,
+        SIC:0,
+        SIJ:0,
+
+        hospitality:0
+
+    },
+
+    // ステータス
+    hp:100,
+    happy:50,
+    knowledge:1,
+
+    // PDCA
+    plan:0,
+    doCount:0,
+    check:0,
+    act:0,
+
+    // フラグ
+    hiddenRoute:false
+
 };
 
-// ====================
+// =========================================
+// ゲームデータ
+// =========================================
+
+const game ={
+
+    year:1,
+
+    month:4,
+
+    day:1,
+
+    week:0,
+
+    season:"春",
+
+    gameOver:false,
+
+    clear:false
+
+};
+
+// =========================================
+// 曜日
+// =========================================
+
+const weekList=[
+
+"月曜日",
+"火曜日",
+"水曜日",
+"木曜日",
+"金曜日",
+"土曜日",
+"日曜日"
+
+];
+
+// =========================================
+// 季節
+// =========================================
+
+function updateSeason(){
+
+    if(game.month>=3 && game.month<=5){
+
+        game.season="春";
+
+    }
+
+    else if(game.month>=6 && game.month<=8){
+
+        game.season="夏";
+
+    }
+
+    else if(game.month>=9 && game.month<=11){
+
+        game.season="秋";
+
+    }
+
+    else{
+
+        game.season="冬";
+
+    }
+
+}
+
+// =========================================
 // 初期化
-// ====================
-document.addEventListener("DOMContentLoaded", function () {
+// =========================================
 
-    console.log("GAME JS 起動");
+document.addEventListener("DOMContentLoaded",()=>{
 
-    loadPlayerName();
-    updateUI();
+    console.log("GAME START");
+
+    loadPlayer();
+
+    checkHiddenRoute();
+
+    updateSeason();
+
+    updateStatus();
+
+    updateDate();
+
     bindButtons();
 
-    setEvent("今日も静かな朝を迎えた。君はどうする？");
+    addLog("ゲーム開始");
+
+    setQuest(
+        "人生の始まり",
+        "今日から君の人生が始まる。まずは最初の一歩を踏み出そう。"
+    );
+
 });
 
-// ====================
-// データ読み込み
-// ====================
-function loadPlayerName() {
+// =========================================
+// 名前読み込み
+// =========================================
 
-    const saved = localStorage.getItem("playerName");
+function loadPlayer(){
 
-    if (saved) {
-        player.name = saved;
+    const name=localStorage.getItem("playerName");
+
+    if(name){
+
+        player.name=name;
+
     }
-}
-
-// ====================
-// UI更新
-// ====================
-function updateUI() {
-
-    document.getElementById("playerName").textContent = player.name;
-    document.getElementById("age").textContent = player.age + "歳";
-    document.getElementById("job").textContent = player.job;
-    document.getElementById("hourly").textContent = player.hourly + "円";
-
-    document.getElementById("money").textContent = player.money.toLocaleString() + "円";
-    document.getElementById("saving").textContent = player.saving.toLocaleString() + "円";
-
-    document.getElementById("hp").textContent = player.hp;
-    document.getElementById("happy").textContent = player.happy;
-    document.getElementById("knowledge").textContent = player.knowledge;
-}
-
-// ====================
-// ログ・イベント
-// ====================
-function addLog(text) {
-
-    const log = document.getElementById("log");
-
-    log.innerHTML = text + "<br>" + log.innerHTML;
-}
-
-function setEvent(text) {
-
-    document.getElementById("eventText").innerHTML = text;
-}
-
-// ====================
-// ボタン紐付け
-// ====================
-function bindButtons() {
-
-    document.getElementById("work").onclick = work;
-    document.getElementById("study").onclick = study;
-    document.getElementById("rest").onclick = rest;
-    document.getElementById("shopping").onclick = shopping;
-    document.getElementById("investment").onclick = investment;
-    document.getElementById("skill").onclick = skill;
-    document.getElementById("save").onclick = saveGame;
-}
-
-// ====================
-// 行動：仕事
-// ====================
-function work() {
-
-    const income = player.hourly * 8;
-
-    player.money += income;
-    player.hp -= 10;
-
-    setEvent("仕事へ向かった。疲れたが収入を得た。");
-    addLog(`仕事 +${income}円`);
-
-    updateUI();
-}
-
-// ====================
-// 行動：勉強
-// ====================
-function study() {
-
-    player.knowledge += 1;
-    player.hp -= 5;
-
-    setEvent("集中して勉強した。知識が少し増えた。");
-    addLog("勉強 +知識1");
-
-    updateUI();
-}
-function changeEvent(title, text){
-
-    document.getElementById("eventText").innerHTML =
-    "<strong>" + title + "</strong><br><br>" + text;
 
 }
-// ====================
-// 行動：休む
-// ====================
-function rest() {
 
-    player.hp += 20;
-    if (player.hp > 100) player.hp = 100;
+// =========================================
+// 隠しルート
+// =========================================
 
-    setEvent("ゆっくり休んだ。体力回復。");
-    addLog("休憩 HP回復");
+function checkHiddenRoute(){
 
-    updateUI();
+    if(player.name==="一輝"){
+
+        player.hiddenRoute=true;
+
+        player.money+=110000;
+
+        player.portfolio.VTI=110000;
+
+        addLog("隠しルート解放");
+
+    }
+
 }
 
-// ====================
-// 行動：買い物
-// ====================
-function shopping() {
+// =========================================
+// ステータス更新
+// =========================================
 
-    const cost = Math.floor(Math.random() * 5000) + 1000;
+function updateStatus(){
 
-    player.money -= cost;
+    document.getElementById("playerName").textContent=player.name;
 
-    setEvent("買い物をした。少しお金を使った。");
-    addLog(`買い物 -${cost}円`);
+    document.getElementById("age").textContent=
+    player.age+"歳";
 
-    updateUI();
-}
+    document.getElementById("job").textContent=
+    player.job;
 
-// ====================
-// 行動：投資
-// ====================
-function investment() {
+    document.getElementById("hourly").textContent=
+    player.hourly.toLocaleString()+"円";
 
-    setEvent("投資について学んだ（まだ実行はできない）");
-    player.knowledge += 1;
+    document.getElementById("money").textContent=
+    player.money.toLocaleString()+"円";
 
-    addLog("投資学習 +知識1");
+    document.getElementById("saving").textContent=
+    player.saving.toLocaleString()+"円";
 
-    updateUI();
-}
+    player.investment=
 
-// ====================
-// 行動：資格
-// ====================
-function skill() {
+        player.portfolio.VTI+
 
-    player.knowledge += 2;
+        player.portfolio.ORLC+
 
-    setEvent("資格の勉強をした。成長した気がする。");
-    addLog("資格学習 +知識2");
+        player.portfolio.SII+
 
-    updateUI();
-}
+        player.portfolio.SIC+
 
-// ====================
-// セーブ
-// ====================
-function saveGame() {
+        player.portfolio.SIJ+
 
-    localStorage.setItem("saveData", JSON.stringify(player));
+        player.portfolio.hospitality;
 
-    addLog("セーブ完了");
-    alert("セーブしました");
+    document.getElementById("investmentMoney").textContent=
+
+    player.investment.toLocaleString()+"円";
+
+    document.getElementById("hp").textContent=
+    player.hp;
+
+    document.getElementById("happy").textContent=
+    player.happy;
+
+    document.getElementById("knowledge").textContent=
+    player.knowledge;
+
 }
