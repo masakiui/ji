@@ -240,3 +240,158 @@ function updateStatus(){
     player.knowledge;
 
 }
+/*=========================================
+ Ver1.0 Part1-2
+ ログ・日付・クエスト
+=========================================*/
+
+// =========================================
+// ログ追加
+// =========================================
+
+function addLog(text){
+
+    const log=document.getElementById("log");
+
+    if(!log) return;
+
+    const now=
+    `【${game.year}年 ${game.month}/${game.day}】`;
+
+    log.innerHTML=
+    now+" "+text+"<br>"+log.innerHTML;
+
+}
+
+// =========================================
+// クエスト表示
+// =========================================
+
+function setQuest(title,text){
+
+    const event=document.getElementById("eventText");
+
+    if(!event) return;
+
+    event.innerHTML=
+
+    "<strong>"+title+"</strong><br><br>"+text;
+
+}
+
+// =========================================
+// 日付更新
+// =========================================
+
+function updateDate(){
+
+    document.getElementById("year").textContent=
+    "第"+game.year+"年";
+
+    document.getElementById("month").textContent=
+    game.month+"月";
+
+    document.getElementById("day").textContent=
+    game.day+"日";
+
+    document.getElementById("season").textContent=
+    game.season;
+
+    document.getElementById("week").textContent=
+    weekList[game.week];
+
+}
+
+// =========================================
+// 次の日
+// =========================================
+
+function nextDay(){
+
+    game.day++;
+
+    game.week++;
+
+    if(game.week>=7){
+
+        game.week=0;
+
+    }
+
+    // 月末
+
+    if(game.day>30){
+
+        game.day=1;
+
+        game.month++;
+
+    }
+
+    // 年越し
+
+    if(game.month>12){
+
+        game.month=1;
+
+        game.year++;
+
+        player.age++;
+
+    }
+
+    updateSeason();
+
+    updateDate();
+
+    updateStatus();
+
+    addLog("新しい一日が始まった。");
+
+    randomQuest();
+
+}
+
+// =========================================
+// クエスト抽選（土台）
+// =========================================
+
+function randomQuest(){
+
+    const r=Math.random();
+
+    if(r<0.25){
+
+        setQuest(
+        "ライフクエスト",
+        "今日は何事もなく平和な一日だった。");
+
+        return;
+
+    }
+
+    if(r<0.50){
+
+        setQuest(
+        "ライフクエスト",
+        "車の調子が悪いようだ……。");
+
+        return;
+
+    }
+
+    if(r<0.75){
+
+        setQuest(
+        "投資クエスト",
+        "市場が少し下落している。");
+
+        return;
+
+    }
+
+    setQuest(
+    "勉強クエスト",
+    "今日は学習する絶好の日だ。");
+
+}
