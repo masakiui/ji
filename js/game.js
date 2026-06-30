@@ -267,3 +267,5 @@ function nextDay() {
 
     addLog("新しい日");
 }
+document.getElementById("versionTag").textContent =
+"Version 0.1.0 Beta";
