@@ -72,9 +72,4 @@ function setupContinue(){
     }
 
 }
-function openBugReport() {
-    window.open(
-        "https://forms.gle/",
-        "_blank"
-    );
-}
+
