@@ -395,3 +395,148 @@ function randomQuest(){
     "今日は学習する絶好の日だ。");
 
 }
+// ====================
+// ボタン紐付け
+// ====================
+function bindButtons() {
+
+    const workBtn = document.getElementById("work");
+    if (workBtn) workBtn.addEventListener("click", work);
+
+    const studyBtn = document.getElementById("study");
+    if (studyBtn) studyBtn.addEventListener("click", study);
+
+    const restBtn = document.getElementById("rest");
+    if (restBtn) restBtn.addEventListener("click", rest);
+
+    const shoppingBtn = document.getElementById("shopping");
+    if (shoppingBtn) shoppingBtn.addEventListener("click", shopping);
+
+    const investmentBtn = document.getElementById("investment");
+    if (investmentBtn) investmentBtn.addEventListener("click", investment);
+
+    const skillBtn = document.getElementById("skill");
+    if (skillBtn) skillBtn.addEventListener("click", skill);
+
+    const saveBtn = document.getElementById("save");
+    if (saveBtn) saveBtn.addEventListener("click", saveGame);
+
+    const nextDayBtn = document.getElementById("nextDay");
+    if (nextDayBtn) nextDayBtn.addEventListener("click", nextDay);
+
+}
+/*=========================================
+ 行動システム（仕事・勉強・休む・買い物・投資・資格・セーブ）
+=========================================*/
+
+// ====================
+// 仕事
+// ====================
+function work() {
+
+    const income = player.hourly * 8;
+
+    player.money += income;
+    player.hp -= 10;
+    player.happy -= 1;
+
+    if (player.hp < 0) player.hp = 0;
+
+    setQuest("仕事", "今日は仕事をこなした。");
+    addLog("仕事 + " + income.toLocaleString() + "円");
+
+    updateStatus();
+}
+
+// ====================
+// 勉強
+// ====================
+function study() {
+
+    player.knowledge += 1;
+    player.hp -= 5;
+    player.happy -= 1;
+
+    if (player.hp < 0) player.hp = 0;
+
+    setQuest("勉強", "知識を少し得た。");
+    addLog("勉強 +知識1");
+
+    updateStatus();
+}
+
+// ====================
+// 休む
+// ====================
+function rest() {
+
+    player.hp += 20;
+    player.happy += 1;
+
+    if (player.hp > 100) player.hp = 100;
+    if (player.happy > 100) player.happy = 100;
+
+    setQuest("休息", "しっかり休んだ。");
+    addLog("休息 HP回復");
+
+    updateStatus();
+}
+
+// ====================
+// 買い物
+// ====================
+function shopping() {
+
+    const cost = Math.floor(Math.random() * 5000) + 1000;
+
+    player.money -= cost;
+
+    setQuest("買い物", "少し出費した。");
+    addLog("買い物 -" + cost.toLocaleString() + "円");
+
+    updateStatus();
+}
+
+// ====================
+// 投資（学習＋疑似運用）
+// ====================
+function investment() {
+
+    const gain = Math.floor(Math.random() * 3000);
+
+    player.investment += gain;
+    player.knowledge += 1;
+
+    setQuest("投資", "投資の理解が深まった。");
+    addLog("投資学習 +知識1 / + " + gain + "円（仮想）");
+
+    updateStatus();
+}
+
+// ====================
+// 資格
+// ====================
+function skill() {
+
+    player.knowledge += 2;
+    player.happy += 1;
+
+    setQuest("資格", "努力が実力になりつつある。");
+    addLog("資格 +知識2");
+
+    updateStatus();
+}
+
+// ====================
+// セーブ
+// ====================
+function saveGame() {
+
+    localStorage.setItem("saveData", JSON.stringify({
+        player,
+        game
+    }));
+
+    addLog("セーブ完了");
+    alert("セーブしました");
+}
