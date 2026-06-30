@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     updateDate();
 
-    bindButtons();
+    bindButtons(console.log("② bindButtons到達"););
 
     addLog("ゲーム開始");
 
