@@ -179,13 +179,20 @@ function updateSeason() {
 // ====================
 function bindButtons() {
 
+    console.log("bindButtons開始");
+
     const bind = (id, fn) => {
+
         const el = get(id);
+
         if (!el) {
-            console.warn("button missing:", id);
+            console.error(id + " が見つかりません");
             return;
         }
-        el.onclick = fn;
+
+        console.log(id + " 接続完了");
+
+        el.addEventListener("click", fn);
     };
 
     bind("work", work);
@@ -196,8 +203,9 @@ function bindButtons() {
     bind("skill", skill);
     bind("save", saveGame);
     bind("nextDay", nextDay);
-}
 
+    console.log("bindButtons終了");
+}
 // ====================
 // ログ
 // ====================
