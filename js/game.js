@@ -1,6 +1,6 @@
 /*=========================================
  人生というゲーム
- game.js（Stable Fix Version）
+ game.js（Single Stable Build）
 =========================================*/
 
 // ====================
@@ -44,33 +44,32 @@ const game = {
 };
 
 // ====================
-// 安全取得
+// ユーティリティ
 // ====================
 function get(id) {
     return document.getElementById(id);
 }
 
 // ====================
-// 初期化（最重要）
+// 初期化
 // ====================
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("GAME INIT SAFE");
+    console.log("GAME LOADED SUCCESS");
 
     loadPlayer();
     updateSeason();
 
-    updateStatus();
-    updateDate();
+    updateAllUI();
 
     bindButtons();
 
-    addLog("ゲーム開始");
     setQuest("人生の始まり", "今日から人生が始まる。");
 
-    // version表示（安全）
+    addLog("ゲーム開始");
+
     const tag = get("versionTag");
-    if (tag) tag.textContent = "Version 0.1.0 Beta";
+    if (tag) tag.textContent = "Version 1.0 Stable";
 });
 
 // ====================
@@ -82,43 +81,11 @@ function loadPlayer() {
 }
 
 // ====================
-// ログ
+// UI更新まとめ
 // ====================
-function addLog(text) {
-
-    const log = get("log");
-    if (!log) return;
-
-    const now = `【${game.year}年 ${game.month}/${game.day}】`;
-    log.innerHTML = now + " " + text + "<br>" + log.innerHTML;
-}
-
-// ====================
-// イベント表示
-// ====================
-function setQuest(title, text) {
-
-    const el = get("eventText");
-    if (!el) return;
-
-    el.innerHTML = `<strong>${title}</strong><br><br>${text}`;
-}
-
-// ====================
-// 日付
-// ====================
-function updateDate() {
-
-    const set = (id, val) => {
-        const el = get(id);
-        if (el) el.textContent = val;
-    };
-
-    set("year", "第" + game.year + "年");
-    set("month", game.month + "月");
-    set("day", game.day + "日");
-    set("week", ["月","火","水","木","金","土","日"][game.week]);
-    set("season", game.season);
+function updateAllUI() {
+    updateStatus();
+    updateDate();
 }
 
 // ====================
@@ -155,10 +122,28 @@ function updateStatus() {
 }
 
 // ====================
+// 日付
+// ====================
+function updateDate() {
+
+    const weekList = ["月", "火", "水", "木", "金", "土", "日"];
+
+    const set = (id, val) => {
+        const el = get(id);
+        if (el) el.textContent = val;
+    };
+
+    set("year", "第" + game.year + "年");
+    set("month", game.month + "月");
+    set("day", game.day + "日");
+    set("week", weekList[game.week]);
+    set("season", game.season);
+}
+
+// ====================
 // 季節
 // ====================
 function updateSeason() {
-
     if (game.month <= 2 || game.month === 12) game.season = "冬";
     else if (game.month <= 5) game.season = "春";
     else if (game.month <= 8) game.season = "夏";
@@ -166,14 +151,14 @@ function updateSeason() {
 }
 
 // ====================
-// ボタン紐付け（完全安全）
+// ボタン紐付け（超安定版）
 // ====================
 function bindButtons() {
 
     const bind = (id, fn) => {
         const el = get(id);
         if (!el) {
-            console.warn("missing button:", id);
+            console.warn("button missing:", id);
             return;
         }
         el.onclick = fn;
@@ -187,6 +172,30 @@ function bindButtons() {
     bind("skill", skill);
     bind("save", saveGame);
     bind("nextDay", nextDay);
+}
+
+// ====================
+// ログ
+// ====================
+function addLog(text) {
+
+    const log = get("log");
+    if (!log) return;
+
+    const now = `【${game.year}年 ${game.month}/${game.day}】`;
+
+    log.innerHTML = now + " " + text + "<br>" + log.innerHTML;
+}
+
+// ====================
+// イベント
+// ====================
+function setQuest(title, text) {
+
+    const el = get("eventText");
+    if (!el) return;
+
+    el.innerHTML = `<strong>${title}</strong><br><br>${text}`;
 }
 
 // ====================
