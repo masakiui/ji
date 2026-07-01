@@ -76,8 +76,32 @@ document.addEventListener("DOMContentLoaded", () => {
 // ロード
 // ====================
 function loadPlayer() {
+
+    // まずセーブデータを読む
+    const saveData = localStorage.getItem("saveData");
+
+    if (saveData) {
+
+        const data = JSON.parse(saveData);
+
+        if (data.player) {
+            Object.assign(player, data.player);
+        }
+
+        if (data.game) {
+            Object.assign(game, data.game);
+        }
+
+        console.log("セーブデータ読込成功");
+        return;
+    }
+
+    // セーブが無い場合だけ名前を読む
     const name = localStorage.getItem("playerName");
-    if (name) player.name = name;
+
+    if (name) {
+        player.name = name;
+    }
 }
 
 // ====================
