@@ -2,104 +2,117 @@
 <html lang="ja">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>人生というゲーム ～君の選択が人生をつくる～</title>
 
-    <title>遊び方 | 人生というゲーム</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/game.css">
 </head>
 
 <body>
 
-    <main class="container">
+<div class="game-container">
 
-        <h1>GUIDE</h1>
+    <!-- =========================
+        ステータス
+    ========================== -->
+    <aside class="status">
 
-        <p class="subtitle">
-            ～人生というゲームの遊び方～
-        </p>
+        <h2>PLAYER STATUS</h2>
 
-        <div class="guide-box">
+        <hr>
 
-            <h2>🎮 ゲームの目的</h2>
+        <p>名前：<span id="playerName">主人公</span></p>
+        <p>年齢：<span id="age">24歳</span></p>
+        <p>職業：<span id="job">地方の準社員</span></p>
+        <p>時給：<span id="hourly">1040円</span></p>
 
-            <p>
-                このゲームは、お金・時間・健康・人間関係など、
-                人生で直面するさまざまな選択を体験しながら、
-                マネーリテラシーと人生設計を楽しく学ぶシミュレーションRPGです。
-            </p>
+        <hr>
 
-            <br>
+        <p>所持金：<span id="money">30000円</span></p>
+        <p>貯金：<span id="saving">0円</span></p>
+        <p>投資資産：<span id="investmentMoney">0円</span></p>
 
-            <h2>💼 行動について</h2>
+        <hr>
 
-            <ul>
-                <li>仕事：お金を稼ぎます。</li>
-                <li>勉強：知識やスキルを伸ばします。</li>
-                <li>休む：体力を回復します。</li>
-                <li>買い物：幸福度が変化します。</li>
-                <li>投資：お金の知識を身につけます。</li>
-                <li>資格取得：将来の選択肢を広げます。</li>
-            </ul>
+        <p>体力：<span id="hp">100</span></p>
+        <p>幸福度：<span id="happy">50</span></p>
+        <p>知識：<span id="knowledge">1</span></p>
 
-            <br>
+    </aside>
 
-            <h2>📊 ステータス</h2>
+    <!-- =========================
+        メイン
+    ========================== -->
+    <main class="main">
 
-            <ul>
-                <li>所持金</li>
-                <li>体力</li>
-                <li>幸福度</li>
-                <li>知識</li>
-                <li>金融知識</li>
-                <li>スキル</li>
-            </ul>
+        <header>
 
-            <br>
+            <h1>人生というゲーム</h1>
+            <h3>～君の選択が人生をつくる～</h3>
 
-            <h2>🏆 エンディング</h2>
+            <hr>
 
             <p>
-                君の選択によって人生は大きく変わります。
-                どんな未来になるかは、すべて君次第です。
+                <span id="year">第1年</span>
+                <span id="season">春</span>
+                <span id="month">4月</span>
+                <span id="day">1日</span>
+                <span id="week">月曜日</span>
             </p>
 
-            <br>
+        </header>
 
-            <h2>💡 ヒント</h2>
+        <!-- イベント -->
+        <section class="event-window">
 
-            <p>
-                目先のお金だけでなく、
-                健康や知識、人とのつながりも大切にしましょう。
-                思わぬ選択が未来を変えるかもしれません。
+            <h2>今日の出来事</h2>
+
+            <p id="eventText">
+                今日も静かな朝を迎えた。<br><br>
+                君はどうする？
             </p>
 
-        </div>
+        </section>
 
-        <div class="menu">
+        <!-- 行動ボタン -->
+        <section class="actions">
 
-            <button onclick="location.href='index.html'">
+            <button id="work">💼 仕事へ行く</button>
+            <button id="study">📚 勉強する</button>
+            <button id="rest">🛏 休む</button>
+            <button id="shopping">🛒 買い物</button>
+            <button id="investment">📈 投資を学ぶ</button>
+            <button id="skill">🎓 資格取得</button>
 
-                ← タイトルへ戻る
+            <button id="save">💾 セーブ</button>
+            <button id="nextDay">📅 次の日へ</button>
 
-            </button>
+            <button onclick="location.href='index.html'">← タイトルへ戻る</button>
 
-        </div>
-
-        <div class="version">
-
-            Version 0.1.0
-
-        </div>
+        </section>
 
     </main>
 
+</div>
+
+<!-- =========================
+    ログ
+========================= -->
+<section class="log-window">
+
+    <h2>GAME LOG</h2>
+
+    <div id="log">ゲーム開始</div>
+
+</section>
+
+<!-- バージョン表示 -->
+<div id="versionTag"></div>
+
+<!-- JSは必ず最後 -->
+<script src="js/game.js"></script>
+
 </body>
-
 </html>
-
