@@ -1,6 +1,6 @@
 /*=========================================
  人生というゲーム
- game.js（Stable Version / Crash Safe）
+ game.js（Stable Fix Version）
 =========================================*/
 
 // ====================
@@ -44,18 +44,18 @@ const game = {
 };
 
 // ====================
-// 安全DOM取得
+// 安全取得
 // ====================
 function get(id) {
     return document.getElementById(id);
 }
 
 // ====================
-// 初期化
+// 初期化（最重要）
 // ====================
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("GAME START SAFE MODE");
+    console.log("GAME INIT SAFE");
 
     loadPlayer();
     updateSeason();
@@ -67,10 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addLog("ゲーム開始");
     setQuest("人生の始まり", "今日から人生が始まる。");
+
+    // version表示（安全）
+    const tag = get("versionTag");
+    if (tag) tag.textContent = "Version 0.1.0 Beta";
 });
 
 // ====================
-// ローカルデータ
+// ロード
 // ====================
 function loadPlayer() {
     const name = localStorage.getItem("playerName");
@@ -78,7 +82,7 @@ function loadPlayer() {
 }
 
 // ====================
-// ログ（完全安全）
+// ログ
 // ====================
 function addLog(text) {
 
@@ -86,12 +90,11 @@ function addLog(text) {
     if (!log) return;
 
     const now = `【${game.year}年 ${game.month}/${game.day}】`;
-
     log.innerHTML = now + " " + text + "<br>" + log.innerHTML;
 }
 
 // ====================
-// クエスト
+// イベント表示
 // ====================
 function setQuest(title, text) {
 
@@ -163,13 +166,17 @@ function updateSeason() {
 }
 
 // ====================
-// ボタン（クラッシュ防止版）
+// ボタン紐付け（完全安全）
 // ====================
 function bindButtons() {
 
     const bind = (id, fn) => {
         const el = get(id);
-        if (el) el.onclick = fn;
+        if (!el) {
+            console.warn("missing button:", id);
+            return;
+        }
+        el.onclick = fn;
     };
 
     bind("work", work);
@@ -189,6 +196,7 @@ function work() {
     const income = player.hourly * 8;
     player.money += income;
     player.hp -= 10;
+
     addLog("仕事 +" + income.toLocaleString() + "円");
     setQuest("仕事", "働いた一日。");
     updateStatus();
@@ -197,6 +205,7 @@ function work() {
 function study() {
     player.knowledge += 1;
     player.hp -= 5;
+
     addLog("勉強 +知識1");
     setQuest("勉強", "知識を得た。");
     updateStatus();
@@ -204,6 +213,7 @@ function study() {
 
 function rest() {
     player.hp = Math.min(100, player.hp + 20);
+
     addLog("休息 HP回復");
     setQuest("休息", "回復した。");
     updateStatus();
@@ -212,6 +222,7 @@ function rest() {
 function shopping() {
     const cost = Math.floor(Math.random() * 5000) + 1000;
     player.money -= cost;
+
     addLog("買い物 -" + cost.toLocaleString() + "円");
     setQuest("買い物", "出費した。");
     updateStatus();
@@ -221,13 +232,15 @@ function investment() {
     const gain = Math.floor(Math.random() * 3000);
     player.investment += gain;
     player.knowledge += 1;
-    addLog("投資 +" + gain + "（仮想）");
+
+    addLog("投資 +" + gain);
     setQuest("投資", "学習した。");
     updateStatus();
 }
 
 function skill() {
     player.knowledge += 2;
+
     addLog("資格 +知識2");
     setQuest("資格", "成長した。");
     updateStatus();
@@ -267,9 +280,3 @@ function nextDay() {
 
     addLog("新しい日");
 }
-document.addEventListener("DOMContentLoaded", () => {
-    const tag = document.getElementById("versionTag");
-    if (tag) {
-        tag.textContent = "Version 0.1.0 Beta";
-    }
-});
